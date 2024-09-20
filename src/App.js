@@ -1,25 +1,20 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useContext } from 'react';
+import './index.css'; // Importing global styles here
+import { AuthContext, AuthProvider } from './Contexts/AuthContext';
+import AllRoutes from './AllRoutes/AllRoutes';
 
-function App() {
+const App = () => {
+  const { user, logout } = useContext(AuthContext);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <AuthProvider>
+      <h3 style={{textAlign:"center"}}>Hi {user?.name}!</h3>
+      <div className="app-container">
+        <AllRoutes />
+      </div>
+    </AuthProvider>
   );
-}
+};
 
 export default App;
+
